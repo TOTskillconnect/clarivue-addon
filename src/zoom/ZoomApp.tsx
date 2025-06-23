@@ -1,12 +1,19 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import zoomSdk from '@zoom/appssdk';
 import SidePanelLayout from '../components/SidePanelLayout';
-import CompactSuggestionPanel from '../components/CompactSuggestionPanel';
+import SimplifiedSuggestionPanel from '../components/SimplifiedSuggestionPanel';
 
 export default function ZoomApp() {
   const [meetingInfo, setMeetingInfo] = useState<any>(null);
   const [isConnected, setIsConnected] = useState(false);
   const [zoomClient, setZoomClient] = useState<any>(null);
+  
+  const cleanup = useCallback(() => {
+    if (zoomClient) {
+      // Remove event listeners if needed
+      console.log('Cleaning up Zoom SDK listeners');
+    }
+  }, [zoomClient]);
   
   useEffect(() => {
     // Initialize Zoom Apps SDK
@@ -79,13 +86,8 @@ export default function ZoomApp() {
     initializeZoomApp();
     
     // Cleanup function
-    return () => {
-      if (zoomClient) {
-        // Remove event listeners if needed
-        console.log('Cleaning up Zoom SDK listeners');
-      }
-    };
-  }, []);
+    return cleanup;
+  }, [cleanup]);
 
   return (
     <SidePanelLayout 
@@ -93,7 +95,7 @@ export default function ZoomApp() {
       isConnected={isConnected} 
       meetingInfo={meetingInfo}
     >
-      <CompactSuggestionPanel platform="zoom" />
+      <SimplifiedSuggestionPanel platform="zoom" />
     </SidePanelLayout>
   );
 } 

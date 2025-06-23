@@ -33,7 +33,7 @@ function App() {
     <div style={{ 
       display: 'flex', 
       height: '100vh',
-      backgroundColor: '#f5f5f5'
+      backgroundColor: '#F7FAFC' // gray.50 from Clarivue design system
     }}>
       {/* Mock video meeting area */}
       <div style={{ 
@@ -50,11 +50,29 @@ function App() {
           left: 20,
           zIndex: 10
         }}>
-          <Card size="small" style={{ minWidth: 200 }}>
+          <Card 
+            size="small" 
+            style={{ 
+              minWidth: 200,
+              boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
+              border: '1px solid #EDF2F7' // gray.100
+            }}
+          >
             <Space direction="vertical" size={4}>
-              <Text strong style={{ color: '#1890ff' }}>
-                🎯 Clarivue Demo
-              </Text>
+              <div style={{ display: 'flex', alignItems: 'center' }}>
+                <img 
+                  src="/clarivue-logo-new.png" 
+                  alt="Clarivue" 
+                  style={{
+                    height: 16,
+                    width: 'auto',
+                    marginRight: 8
+                  }}
+                />
+                <Text strong style={{ color: '#1076D1' }}> {/* Primary blue */}
+                  Demo
+                </Text>
+              </div>
               <Select
                 value={selectedPlatform}
                 onChange={setSelectedPlatform}
@@ -66,7 +84,10 @@ function App() {
                   { value: 'meet', label: '🎥 Meet' }
                 ]}
               />
-              <Text type="secondary" style={{ fontSize: 11 }}>
+              <Text type="secondary" style={{ 
+                fontSize: 11,
+                color: '#718096' // gray.500 from design system
+              }}>
                 Side panel addon demo
               </Text>
             </Space>
@@ -84,13 +105,14 @@ function App() {
             <div key={i} style={{ 
               width: 200,
               height: 150,
-              backgroundColor: '#333',
+              backgroundColor: '#2D3748', // gray.700 from design system
               borderRadius: 8,
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               color: '#fff',
-              fontSize: 12
+              fontSize: 12,
+              border: '1px solid #4A5568' // gray.600
             }}>
               👤 Participant {i}
             </div>

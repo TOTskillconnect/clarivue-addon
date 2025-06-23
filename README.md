@@ -5,10 +5,11 @@ A comprehensive meeting enhancement addon frontend for Google Meet, Zoom, and Mi
 ## 🚀 Features
 
 - **Multi-Platform Support**: Works with Google Meet, Zoom, and Microsoft Teams
+- **Unified Design**: Consistent Clarivue branding and UI across all platforms
 - **Smart Questions**: AI-generated questions based on meeting context and participants
 - **Conversation Cues**: Real-time suggestions to improve meeting facilitation
-- **AI Suggestions**: Intelligent recommendations for better meeting outcomes
-- **Modern UI**: Beautiful Ant Design interface with responsive design
+- **Tone Analysis**: Live speaker tone indicator with visual feedback
+- **Modern UI**: Beautiful Ant Design interface with official Clarivue color system
 - **Frontend Focus**: Pure frontend implementation with API-based backend connectivity
 
 ## 📁 Project Structure
@@ -19,22 +20,27 @@ clarivue-addon-app/
 │   ├── components/           # Reusable AntD-based UI components
 │   │   ├── QuestionCard.tsx
 │   │   ├── CueCard.tsx
-│   │   └── SuggestionPanel.tsx
+│   │   ├── ToneIndicator.tsx
+│   │   ├── SimplifiedSuggestionPanel.tsx  # Unified Questions + Cues only
+│   │   └── SidePanelLayout.tsx            # Official Clarivue branding
 │   ├── meet/                 # Google Meet implementation (Apps Script)
 │   │   ├── Code.gs           # CardService-based UI for Google Meet
+│   │   ├── MeetApp.tsx       # React component for Meet
 │   │   ├── appsscript.json   # Apps Script manifest
 │   │   └── ConversionGuide.md # AntD to CardService conversion guide
-│   ├── zoom/                 # Zoom SDK app with AntD
+│   ├── zoom/                 # Zoom SDK app with unified design
 │   │   └── ZoomApp.tsx
-│   ├── teams/                # Teams SDK app with AntD  
+│   ├── teams/                # Teams SDK app with unified design  
 │   │   └── TeamsApp.tsx
 │   ├── utils/                # Utility functions and API helpers
-│   ├── App.tsx               # Platform router based on URL pathname
+│   ├── App.tsx               # Platform router with Clarivue demo selector
 │   └── index.tsx
 ├── manifest/                 # Platform manifest files
 │   ├── teams-manifest.json
 │   └── meet-manifest.json
 ├── public/
+│   ├── clarivue-logo-new.png # Official Clarivue logo
+│   └── COLOR-DESIGN-SYSTEM.md # Official color guidelines
 ├── scripts/                  # Setup and build scripts
 ├── package.json
 └── README.md
@@ -43,13 +49,28 @@ clarivue-addon-app/
 ## 🛠️ Technology Stack
 
 - **Frontend**: React 18 with TypeScript
-- **UI Framework**: Ant Design 5.x
+- **UI Framework**: Ant Design 5.x with Clarivue color system
 - **Backend**: API-based (to be connected later)
 - **Build Tool**: Create React App
 - **Platform SDKs**: 
   - Google Meet Apps Script (CardService)
   - Zoom Web SDK (@zoom/appssdk)
   - Microsoft Teams SDK (@microsoft/teams-js)
+
+## 🎨 Unified Design System
+
+### **Official Clarivue Branding:**
+- **Logo**: Official `clarivue-logo-new.png` across all platforms
+- **Colors**: Full compliance with `COLOR-DESIGN-SYSTEM.md`
+  - Primary Blue: `#1076D1` - Main brand color
+  - Secondary Purple-Blue: `#5F9DF7` - Secondary elements
+  - Gray Scale: Semantic usage from gray.50 to gray.900
+  - Status Colors: Success `#38A169`, Warning `#ED8936`, Error `#E53E3E`
+
+### **Consistent UI Structure:**
+1. **Header**: Official Clarivue logo + connection status
+2. **Tone Indicator**: Circular visualization with brand colors
+3. **Tabbed Content**: Questions and Cues only (AI tab removed)
 
 ## 🚀 Getting Started
 
@@ -76,46 +97,53 @@ clarivue-addon-app/
    npm start
    ```
 
+4. **View the demo**
+   - Visit `http://localhost:3001`
+   - Use the platform selector to test all implementations
+   - Experience unified Clarivue design across Meet, Zoom, and Teams
+
 ## 📦 Platform Implementation
 
-### Google Meet (Apps Script)
-- Uses Google Apps Script CardService for UI rendering
-- Implemented in `src/meet/Code.gs` with complete CardService components
-- Emulates Ant Design components using CardService widgets
-- See `ConversionGuide.md` for AntD to CardService conversion patterns
+### Google Meet (Apps Script + React)
+- **Apps Script**: `src/meet/Code.gs` with Clarivue-branded CardService components
+- **React**: `src/meet/MeetApp.tsx` with official logo and colors
+- Uses `SimplifiedSuggestionPanel` (Questions + Cues only)
 
 ### Zoom (React + Web SDK)
-- React-based UI using Ant Design components
+- **Component**: `src/zoom/ZoomApp.tsx`
 - Integrates with Zoom Web SDK (@zoom/appssdk)
-- Supports Zoom's embedded app framework
+- Unified Clarivue branding and simplified tabbed interface
 
 ### Microsoft Teams (React + Teams SDK)
-- React-based UI using Ant Design components  
+- **Component**: `src/teams/TeamsApp.tsx`  
 - Integrates with Microsoft Teams SDK (@microsoft/teams-js)
-- Uses modern Teams app initialization patterns
+- Consistent design with Meet and Zoom implementations
 
 ## 🔧 Development
 
 ### Component Structure
 
-- **QuestionCard**: Displays suggested questions in a clean card format
-- **CueCard**: Shows conversation cues and facilitation tips
-- **SuggestionPanel**: Tabbed interface with Questions, Suggestions, and Cues sections
+- **SidePanelLayout**: Unified layout with official Clarivue branding
+- **ToneIndicator**: Circular tone visualization with brand colors
+- **SimplifiedSuggestionPanel**: Questions and Cues tabs only
+- **QuestionCard**: Individual question components
+- **CueCard**: Conversation facilitation tips
 
 ### Platform Routing
 
 The app uses pathname-based routing in `App.tsx`:
 - `/zoom/*` routes → ZoomApp component
 - `/teams/*` routes → TeamsApp component  
-- Other paths → "Unsupported platform" message
+- `/meet/*` routes → MeetApp component
+- Development mode → Platform selector with demo environment
 
-### API Integration (Future)
+## 🎯 Design Philosophy
 
-The frontend is designed to connect to backend services via API calls:
-- Question generation endpoints
-- Meeting context analysis
-- User preference management
-- Real-time suggestion streaming
+- **Consistency First**: Identical user experience across all platforms
+- **Brand Compliance**: Official Clarivue visual identity
+- **Focused Functionality**: Core features (Questions + Cues) without distractions
+- **Accessibility**: WCAG 2.1 AA compliant color combinations
+- **Professional Polish**: Enterprise-ready visual presentation
 
 ## 🚀 Deployment
 
@@ -139,8 +167,8 @@ The frontend is designed to connect to backend services via API calls:
 The frontend is prepared for API-based backend connectivity:
 
 - **Question API**: GET `/api/questions?context={meeting_context}`
-- **Suggestions API**: POST `/api/suggestions` with meeting data
 - **Cues API**: GET `/api/cues?participants={count}&topic={topic}`
+- **Tone Analysis API**: GET `/api/tone/live` with real-time updates
 - **Analytics API**: POST `/api/analytics/meeting-events`
 
 Backend implementation will be handled separately via REST APIs.
@@ -149,9 +177,10 @@ Backend implementation will be handled separately via REST APIs.
 
 1. Fork the repository
 2. Create a feature branch: `git checkout -b feature/amazing-feature`
-3. Commit your changes: `git commit -m 'Add amazing feature'`
-4. Push to the branch: `git push origin feature/amazing-feature`
-5. Open a Pull Request
+3. Follow Clarivue design system guidelines
+4. Commit your changes: `git commit -m 'Add amazing feature'`
+5. Push to the branch: `git push origin feature/amazing-feature`
+6. Open a Pull Request
 
 ## 📝 License
 
@@ -163,6 +192,10 @@ For support, email support@clarivue.com or create an issue in this repository.
 
 ## 🔮 Roadmap
 
+- [x] Unified Clarivue branding across all platforms
+- [x] Official color design system implementation
+- [x] Simplified UI (Questions + Cues focus)
+- [x] Real-time tone analysis visualization
 - [ ] API backend integration
 - [ ] Real-time transcription integration  
 - [ ] Advanced AI suggestions via API

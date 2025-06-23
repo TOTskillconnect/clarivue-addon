@@ -92,11 +92,26 @@ export const API_ENDPOINTS = {
   WEBSOCKET: `${environment.WS_BASE_URL}/ws/meetings`
 };
 
+// Clarivue Platform endpoints for authentication and account integration
+export const CLARIVUE_ENDPOINTS = {
+  AUTH_VERIFY: `${environment.API_BASE_URL}/v1/auth/verify`,
+  LOGIN: `${environment.API_BASE_URL}/auth/google-meet-login`,
+  SIGNUP: `${environment.API_BASE_URL}/signup`,
+  DASHBOARD: `${environment.API_BASE_URL}/dashboard/meetings`,
+  SETTINGS: `${environment.API_BASE_URL}/settings/integrations`,
+  QUESTIONS: `${environment.API_BASE_URL}/v1/questions/meeting-suggestions`,
+  TONE_ANALYSIS: `${environment.WS_BASE_URL}/v1/tone/live`,
+  MEETINGS: `${environment.API_BASE_URL}/v1/meetings`
+};
+
 // Feature flags
 export const FEATURES = {
   REAL_TIME_API: environment.ENABLE_REAL_TIME_API,
   DEBUG_LOGGING: environment.DEBUG_MODE,
   MOCK_DATA_FALLBACK: true, // Always enabled for demo purposes
   ANALYTICS: isProduction(),
-  ERROR_REPORTING: isProduction() || isStaging()
+  ERROR_REPORTING: isProduction() || isStaging(),
+  CLARIVUE_AUTHENTICATION: true, // Enable Clarivue platform authentication
+  TONE_ANALYSIS: true, // Feature flag for tone analysis
+  AI_SUGGESTIONS: true // Feature flag for AI suggestions
 }; 

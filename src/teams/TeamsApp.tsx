@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import * as microsoftTeams from '@microsoft/teams-js';
 import SidePanelLayout from '../components/SidePanelLayout';
-import CompactSuggestionPanel from '../components/CompactSuggestionPanel';
+import SimplifiedSuggestionPanel from '../components/SimplifiedSuggestionPanel';
 
 export default function TeamsApp() {
   const [meetingInfo, setMeetingInfo] = useState<any>(null);
@@ -43,7 +43,7 @@ export default function TeamsApp() {
       isConnected={isConnected} 
       meetingInfo={meetingInfo}
     >
-      <CompactSuggestionPanel platform="teams" />
+      <SimplifiedSuggestionPanel platform="teams" />
     </SidePanelLayout>
   );
 } 

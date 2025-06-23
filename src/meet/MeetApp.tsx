@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { meet } from '@googleworkspace/meet-addons/meet.addons';
 import SidePanelLayout from '../components/SidePanelLayout';
-import CompactSuggestionPanel from '../components/CompactSuggestionPanel';
+import SimplifiedSuggestionPanel from '../components/SimplifiedSuggestionPanel';
 
 export default function MeetApp() {
   const [meetingInfo, setMeetingInfo] = useState<any>(null);
@@ -51,7 +51,7 @@ export default function MeetApp() {
       isConnected={isConnected} 
       meetingInfo={meetingInfo}
     >
-      <CompactSuggestionPanel platform="meet" />
+      <SimplifiedSuggestionPanel platform="meet" />
     </SidePanelLayout>
   );
 } 

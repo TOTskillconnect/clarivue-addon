@@ -7,8 +7,8 @@
   "runtimeVersion": "V8",
   "addOns": {
     "common": {
-      "name": "Clarivue Meeting Assistant",
-      "logoUrl": "https://fonts.gstatic.com/s/i/materialicons/lightbulb/v6/24px.svg",
+      "name": "Clarivue - Meeting Enhancement",
+      "logoUrl": "https://clarivue.com/assets/clarivue-logo-64x64.png",
       "useLocaleFromApp": true,
       "homepageTrigger": {
         "runFunction": "onHomepage",
@@ -16,8 +16,12 @@
       },
       "universalActions": [
         {
-          "label": "Refresh",
-          "runFunction": "onHomepage"
+          "label": "Refresh Content",
+          "runFunction": "refreshContent"
+        },
+        {
+          "label": "Account Settings",
+          "runFunction": "openAccountSettings"
         }
       ]
     },
@@ -33,8 +37,12 @@
         "runFunction": "onMeetingStart",
         "enabled": true
       },
+      "onMeetingEndTrigger": {
+        "runFunction": "onMeetingEnd",
+        "enabled": true
+      },
       "conferenceData": {
-        "createSettingsUrl": "https://clarivue.com/meet/settings",
+        "createSettingsUrl": "https://app.clarivue.com/settings/google-meet",
         "inConferenceData": {
           "addOnParameters": {
             "parameters": [
@@ -49,19 +57,30 @@
               {
                 "key": "timestamp",
                 "value": "{{timestamp}}"
+              },
+              {
+                "key": "organizerEmail",
+                "value": "{{organizerEmail}}"
               }
             ]
           }
         }
-      }
+      },
+      "openLinkUrlPrefixes": [
+        "https://app.clarivue.com/",
+        "https://api.clarivue.com/",
+        "https://clarivue.com/"
+      ]
     }
   },
   "oauthScopes": [
     "https://www.googleapis.com/auth/script.external_request",
     "https://www.googleapis.com/auth/script.storage",
-    "https://www.googleapis.com/auth/calendar.readonly",
-    "https://www.googleapis.com/auth/calendar.events.readonly",
-    "https://www.googleapis.com/auth/gmail.readonly",
-    "https://www.googleapis.com/auth/drive.readonly"
-  ]
+    "https://www.googleapis.com/auth/userinfo.email",
+    "https://www.googleapis.com/auth/userinfo.profile"
+  ],
+  "webapp": {
+    "access": "DOMAIN",
+    "executeAs": "USER_ACCESSING"
+  }
 } 
